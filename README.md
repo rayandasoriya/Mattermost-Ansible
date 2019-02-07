@@ -96,3 +96,11 @@ Password: Password
 As a last step to setup the email, I have created a temporary account at Zoho and have added the SMTP connection among my server.
 Complete the email notification step by running ```ansible-playbook mattermost_installation.yml -i inventory```. This will move the config.json file to the server and will restart the server so that we can see the changes made.
 
+### Screencast
+The link for screencast is available [here].
+
+### References
+1. https://github.com/CSC-DevOps/CM
+2. https://github.com/CSC-DevOps/Course/blob/master/HW/HW2-mm.md
+3. https://docs.ansible.com/
+4. https://docs.mattermost.com/install/install-ubuntu-1604.html
