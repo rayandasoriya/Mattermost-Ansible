@@ -1,6 +1,9 @@
 # Non-sensitive data
 mysql_user: mmuser
 mysql_database: mattermost
+team_name: devops
+admin_name: admin
+user_name: user
 
 # Sensitive data
 mysql_root_pass: "{{ vault_mysql_root_pass }}"

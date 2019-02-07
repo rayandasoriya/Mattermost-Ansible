@@ -1,0 +1,24 @@
+ - hosts: all
+   user: vagrant
+   become: yes
+   become_method: sudo
+   tasks:
+   - name: Added variables
+     include_vars:
+       file: ../vars/vars.yml  
+
+   - name: copy config.json to mattermost server
+     sudo: yes
+     template:
+       src: ../templates/config.json
+       dest: /opt/mattermost/config/config.json
+       owner: mattermost
+       mode: 0777
+
+   - name: Restart Mattermost service systemctl
+     sudo: yes
+     systemd:
+       state: restarted
+       daemon_reload: yes
+       enabled: true
+       name: mattermost.service
