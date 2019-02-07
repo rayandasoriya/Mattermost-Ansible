@@ -64,13 +64,20 @@ Inside the ansible-srv, test your connection between the servers:
     ssh -i ~/.ssh/web-srv vagrant@192.168.33.100
 This completes the basic configuration of Ubuntu on both the servers with ansible configured on one of them.
 
+![image](images/1.png)
+
+
 #### Setting up MySQL Database Server
 Go to ansible-srv/playbook and run ```ansible-playbook mysql.yml -i inventory```.
 It will install the MySQL databse server and will also setup the mmuser.
 
+![image](images/2.png)
+
 #### Setting up Mattermost Server
 Go to ansible-srv/playbook and run ```ansible-playbook mattermost_installation.yml -i inventory```.
 It will install the mattermost server. If everything goes perfect. We can see the webpage on 192.168.33.100:8065.
+
+![image](images/3.png)
 
 #### Configuring Mattermost Server
 Go to ansible-srv/playbook and run ```ansible-playbook mattermost_user_creation.yml -i inventory```.
@@ -84,9 +91,13 @@ Password: Password
 Username: user@example.com
 Password: Password
 
+![image](images/4.png)
+
 #### Setting up email notifications
 As a last step to setup the email, I have created a temporary account at Zoho and have added the SMTP connection among my server.
 Complete the email notification step by running ```ansible-playbook mattermost_config_restart.yml -i inventory```. This will move the config.json file to the server and will restart the server so that we can see the changes made.
+
+![image](images/5.png)
 
 ### Best Practices Used:
 * Introduced modularity in the code by didividing the code into small logical working modules.
