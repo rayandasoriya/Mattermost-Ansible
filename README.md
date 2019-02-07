@@ -86,7 +86,7 @@ Password: Password
 
 #### Setting up email notifications
 As a last step to setup the email, I have created a temporary account at Zoho and have added the SMTP connection among my server.
-Complete the email notification step by running ```ansible-playbook mattermost_installation.yml -i inventory```. This will move the config.json file to the server and will restart the server so that we can see the changes made.
+Complete the email notification step by running ```ansible-playbook mattermost_config_restart.yml -i inventory```. This will move the config.json file to the server and will restart the server so that we can see the changes made.
 
 ### Best Practices Used:
 * Introduced modularity in the code by didividing the code into small logical working modules.
