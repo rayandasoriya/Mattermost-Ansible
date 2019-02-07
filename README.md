@@ -21,14 +21,6 @@ $ cd servers/ansible-srv
 $ baker bake
 ```
 
-Baker will create a VM.
-
-```
-✔ Running apt-get update on VM
-✔ Preparing ansible
-✔ Installing ansible
-```
-
 ##### The web server
 
 Create another virtual machine for the web server. 
