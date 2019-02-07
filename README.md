@@ -82,7 +82,7 @@ It will install the mattermost server. If everything goes perfect. We can see th
 
 #### Configuring Mattermost Server
 Go to ansible-srv/playbook and run ```ansible-playbook mattermost_user_creation.yml -i inventory```.
-It will craete a team, an admin and a user and will also add them to the team. We can log in to the system by using the following credentials.
+It will craete a team, an admin and a user and will also add them to the team. We can log in to the system by using the following credentials. *This needs to be run only once.*
 
 * For admin:
 Username: admin@example.com
@@ -95,6 +95,10 @@ Password: Password
 #### Setting up email notifications
 As a last step to setup the email, I have created a temporary account at Zoho and have added the SMTP connection among my server.
 Complete the email notification step by running ```ansible-playbook mattermost_installation.yml -i inventory```. This will move the config.json file to the server and will restart the server so that we can see the changes made.
+
+### Best Practices Used:
+* Introduced modularity in the code by didividing the code into small logical working modules.
+* Used vault to store the sensitive data as a seperate file.
 
 ### Screencast
 The link for screencast is available [here].
