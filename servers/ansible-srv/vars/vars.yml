@@ -1,0 +1,7 @@
+# Non-sensitive data
+mysql_user: mmuser
+mysql_database: mattermost
+
+# Sensitive data
+mysql_root_pass: "{{ vault_mysql_root_pass }}"
+mysql_password: "{{ vault_mysql_password }}"

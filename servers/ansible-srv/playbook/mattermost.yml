@@ -1,0 +1,88 @@
+ - hosts: all
+   user: vagrant
+   become: yes
+   become_method: sudo
+   vars:
+     database_config: '        "DataSource": "mmuser:12345@tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s",'
+
+   
+   tasks:
+
+    - name: Added variables
+      include_vars:
+        file: ../vars/vars.yml
+
+    - name: Installing Mattermost server
+      get_url:
+        url: https://releases.mattermost.com/5.7.1/mattermost-5.7.1-linux-amd64.tar.gz
+        dest: /usr/lib/
+        mode: 0777
+
+    - name: Extract Mattermost.tar.gz into /usr/lib/
+      sudo: yes
+      unarchive:
+        src: /usr/lib/mattermost-5.7.1-linux-amd64.tar.gz
+        dest: /opt/
+        remote_src: yes
+
+    - name: Create a directory 'data'
+      sudo: yes
+      file:
+        path: /opt/mattermost/data
+        state: directory
+        mode: "g+w"
+
+    - name: Create a group 'mattermost'
+      group:
+        name: mattermost
+        state: present
+
+    - name: Create a user 'mattermost'
+      user:
+        name: mattermost
+        group: mattermost
+
+    - name: Set permissions
+      file:
+        dest: /opt/mattermost/
+        owner: mattermost
+        group: mattermost
+        mode: "g+w"
+        recurse: yes
+
+
+    - name: Edit /opt/mattermost/config/config.json
+      template:
+        src: ../templates/configjson.j2
+        dest: /opt/mattermost/config/config.json
+
+    - name: copy mattermost.service file
+      sudo: yes
+      template:
+        src: ../service/mattermost.service
+        dest: /lib/systemd/system/mattermost.service
+        owner: root
+
+    - name: Start Mattermost service systemctl
+      sudo: yes
+      systemd:
+        state: started
+        daemon_reload: yes
+        enabled: true
+        name: mattermost.service
+
+    - name: copy config.json to mattermost server
+      sudo: yes
+      template:
+        src: ../templates/config.json
+        dest: /opt/mattermost/config/config.json
+        owner: mattermost
+        mode: 0777
+
+    - name: Restart Mattermost service systemctl
+      sudo: yes
+      systemd:
+        state: restarted
+        daemon_reload: yes
+        enabled: true
+        name: mattermost.service
