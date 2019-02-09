@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  user: vagrant
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: Update and upgrade apt packages
+    become: true
+    apt:
+      upgrade: dist
+      update_cache: yes
+      cache_valid_time: 86400
