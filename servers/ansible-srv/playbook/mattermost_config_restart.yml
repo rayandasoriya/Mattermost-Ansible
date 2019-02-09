@@ -34,7 +34,7 @@
      lineinfile:
         dest: /opt/mattermost/config/config.json
         regexp: '"FeedbackEmail": "",'
-        line: '        "FeedbackEmail": "",'
+        line: '        "FeedbackEmail": "{{FeedbackEmail}}",'
         backrefs: yes
 
    - name: Set EnableSMTPAuth to true
@@ -44,19 +44,11 @@
         line: '        "EnableSMTPAuth": true,'
         backrefs: yes
 
-   - name: Copy config.json to mattermost server
-     sudo: yes
-     template:
-        src: ../templates/config.json
-        dest: /opt/mattermost/config/config.json
-        owner: mattermost
-        mode: 0777
-
    - name: Set SMTP Server Username
      lineinfile:
         dest: /opt/mattermost/config/config.json
         regexp: '"SMTPUsername": "",'
-        line: '        "SMTPUsername": ",'
+        line: '        "SMTPUsername": "",'
         backrefs: yes
 
    - name: Set SMTP Server Password
@@ -91,6 +83,7 @@
         dest: /opt/mattermost/config/config.json
         owner: mattermost
         mode: 0777
+   
    - name: Restart Mattermost service systemctl
      sudo: yes
      systemd:
