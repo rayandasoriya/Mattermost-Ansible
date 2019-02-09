@@ -4,7 +4,16 @@ mysql_database: mattermost
 team_name: devops
 admin_name: admin
 user_name: user
+mysql_root_pass: adbms
+mysql_password: 12345
+database_config: '        "DataSource": "mmuser:12345@tcp(127.0.0.1:3306)/mattermost?charset=utf8mb4,utf8&readTimeout=30s&writeTimeout=30s",'
+SiteURL: 'http://192.168.33.100'
+FeedbackName: 'No-Reply'
+SMTPServer: 'smtp.zoho.com'
+SMTPPort: '465'
+ConnectionSecurity: 'TLS'
 
 # Sensitive data
-mysql_root_pass: "{{ vault_mysql_root_pass }}"
-mysql_password: "{{ vault_mysql_password }}"
+FeedbackEmail: "{{ vault_FeedbackEmail }}"
+SMTPUsername: "{{ vault_SMTPUsername }}"
+SMTPPassword: "{{ vault_SMTPPassword }}"

@@ -6,24 +6,40 @@
     - name: Added variables
       include_vars:
         file: ../vars/vars.yml
-        
+
+    - name: Check if data exists
+      sudo: yes
+      stat:
+        path: /opt/file.txt
+      register: file_details
+
     - name: Creating first team "DevOps"
       shell: sudo -u mattermost ./mattermost team create --name {{team_name}} --display_name "{{team_name}} Team"
       args:
         chdir: /opt/mattermost/bin
+      when: file_details.stat.exists == False
+
+    - name: Create the file, if it doesnt exist already
+      sudo: yes
+      file:
+        path: /opt/file.txt
+        state: touch
+      when: file_details.stat.exists == False
 
     - name: Creating an admin account
       shell: sudo -u mattermost ./mattermost user create --email admin@example.com --username {{admin_name}} --password Password
       args:
         chdir: /opt/mattermost/bin
+      when: file_details.stat.exists == False
 
     - name: Creating a user account
       shell: sudo -u mattermost ./mattermost user create --email user@example.com --username {{user_name}} --password Password
       args:
         chdir: /opt/mattermost/bin
+      when: file_details.stat.exists == False
 
     - name: Adding user and admin to the team
       shell: sudo -u mattermost ./mattermost team add {{team_name}} {{admin_name}} {{user_name}}
       args:
         chdir: /opt/mattermost/bin
-
+      when: file_details.stat.exists == False
