@@ -69,7 +69,7 @@ This completes the basic configuration of Ubuntu on both the servers with ansibl
 
 #### Setting up MySQL Database Server
 Go to ansible-srv/playbook and run ```ansible-playbook mysql.yml -i inventory```.
-It will install the MySQL database server and will also set up the mmuser.
+It will install the MySQL database server and will also set up the mmuser. It will also install install all the required dependencies such as pip, pip3 and jq.
 
 ![image](images/2.png)
 
@@ -81,7 +81,7 @@ It will install the mattermost server. If everything goes perfectly. We can see 
 
 #### Configuring Mattermost Server
 Go to ansible-srv/playbook and run ```ansible-playbook mattermost_user_creation.yml -i inventory```.
-It will create a team, an admin and a user and will also add them to the team. We can log in to the system by using the following credentials. *This needs to be run only once.*
+It will create a team, an admin and a user and will also add them to the team. We can log in to the system by using the following credentials. This step has been made idempotent. Once a team has been created, it will not create the same team again.
 
 * For admin:
 Username: admin@example.com
@@ -95,7 +95,8 @@ Password: Password
 
 #### Setting up email notifications
 As the last step to set up the email, I have created a temporary account at Zoho and have added the SMTP connection among my server.
-Complete the email notification step by running ```ansible-playbook mattermost_config_restart.yml -i inventory```. This will move the config.json file to the server and will restart the server so that we can see the changes made.
+Complete the email notification step by running ```ansible-playbook mattermost_config_restart.yml -i inventory```. This will edit the configuration of the email notification. After that, it will restart the server so that we can see the changes made.
+*If you want to set up the SMTP connection, go to vars/vars.yml and edit the SMTPUsername and SMTPPassword if you are using Zoho. If you are using some other SMTP, then configure the SMTPServer and SMTPPort as well. The credentials have also been removed from the current system.*
 
 ![image](images/5.png)
 
