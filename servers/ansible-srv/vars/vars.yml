@@ -15,3 +15,6 @@ SMTPPort: '465'
 ConnectionSecurity: 'TLS'
 
 # Sensitive data
+SMTPUsername: 
+SMTPPassword: 
+FeedbackEmail: 

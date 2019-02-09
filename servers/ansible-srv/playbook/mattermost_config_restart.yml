@@ -48,14 +48,14 @@
      lineinfile:
         dest: /opt/mattermost/config/config.json
         regexp: '"SMTPUsername": "",'
-        line: '        "SMTPUsername": "",'
+        line: '        "SMTPUsername": "{{SMTPUsername}}",'
         backrefs: yes
 
    - name: Set SMTP Server Password
      lineinfile:
         dest: /opt/mattermost/config/config.json
         regexp: '"SMTPPassword": "",'
-        line: '        "SMTPPassword": "",'
+        line: '        "SMTPPassword": "{{SMTPPassword}}",'
         backrefs: yes
 
    - name: Set SMTP Server
@@ -72,14 +72,14 @@
         line: '        "SMTPPort": "{{SMTPPort}}",'
         backrefs: yes
 
-   - name: Set Connection Security
+   - name: Set Connection Security in temp_config.json
      become_user: mattermost
-     shell: jq '.EmailSettings.ConnectionSecurity= "TLS"' /opt/mattermost/config/config.json
+     shell: jq '.EmailSettings.ConnectionSecurity= "TLS"' /opt/mattermost/config/config.json 
      
-   - name: Copy config.json to mattermost server
+   - name: Move temp_config.json to config folder
      sudo: yes
      template:
-        src: ../templates/config.json
+        src: ../templates/configjson1.j2
         dest: /opt/mattermost/config/config.json
         owner: mattermost
         mode: 0777
