@@ -1,7 +1,7 @@
 # CSC519-DevOps
 ## HW2
 
-This repository contains the code to automatically configure a web server running [Mattermost](https://mattermost.com/) using Ansible. To perform the task, we have started by creating two servers running Ubuntu 16.04 with Ansible configured on one of them. After configuring Ansible, we made an SSH connection between the two servers. This connection was used to perform operations on the web server using the Ansible server. After that, I have installed MySQL Database server and Mattermost server. One admin and user have been created as the users of Mattermost server. The configuration of the server was done as the last stage of the project. this configuration included email notifications and storage options. For email confirmation, I have used [Zoho mail](https://www.zoho.com/mail/).
+This repository contains the code to automatically configure a web server running [Mattermost](https://mattermost.com/) using Ansible. To perform the task, we have started by creating two servers running Ubuntu 16.04 with Ansible configured on one of them. After configuring Ansible, we made an SSH connection between the two servers. This connection was used to perform operations on the web server using the Ansible server. After that, I have updated the Ubuntu packages and installed MySQL Database server and Mattermost server. One admin and user have been created as the users of Mattermost server. The configuration of the server was done as the last stage of the project. this configuration included email notifications and storage options. For email confirmation, I have used [Zoho mail](https://www.zoho.com/mail/).
 
 
 ### Setup Instructions 
@@ -66,6 +66,9 @@ This completes the basic configuration of Ubuntu on both the servers with ansibl
 
 ![image](images/1.png)
 
+#### Updating the Ubuntu packages
+Go to ansible-srv/playbook and run ```ansible-playbook prereq.yml -i inventory```.
+It will update the ubuntu packages.
 
 #### Setting up MySQL Database Server
 Go to ansible-srv/playbook and run ```ansible-playbook mysql.yml -i inventory```.
@@ -81,7 +84,7 @@ It will install the mattermost server. If everything goes perfectly. We can see 
 
 #### Configuring Mattermost Server
 Go to ansible-srv/playbook and run ```ansible-playbook mattermost_user_creation.yml -i inventory```.
-It will create a team, an admin and a user and will also add them to the team. We can log in to the system by using the following credentials. This step has been made idempotent. Once a team has been created, it will not create the same team again.
+It will create a team and an admin and will also add it to the team. We can log in to the system by using the following credentials. This step has been made idempotent. It will check if the admina dn team exists. Once a team has been created, it will not create the same team again.
 
 * For admin:
 Username: admin@example.com
@@ -103,9 +106,10 @@ Complete the email notification step by running ```ansible-playbook mattermost_c
 ### Best Practices Used:
 * Introduced modularity in the code by dividing the code into small logical working modules.
 * Used vault to store the sensitive data as a separate file.
+* Applied idempotency in user creation
 
 ### Screencast
-The link for screencast is available [here](https://drive.google.com/file/d/1FWKxTXgxH7XXVwYdmnfTPGhNLLBaH7zT/view?usp=sharing).
+The link for screencast is available [here](https://drive.google.com/file/d/1ovcFpGjPkJaTBERUFLtk3s8BrxOa2RdE/view?usp=sharing).
 
 ### References
 1. https://github.com/CSC-DevOps/CM
