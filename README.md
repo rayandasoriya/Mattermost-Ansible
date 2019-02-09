@@ -96,7 +96,7 @@ Password: Password
 #### Setting up email notifications
 As the last step to set up the email, I have created a temporary account at Zoho and have added the SMTP connection among my server.
 Complete the email notification step by running ```ansible-playbook mattermost_config_restart.yml -i inventory```. This will edit the configuration of the email notification. After that, it will restart the server so that we can see the changes made.
-*If you want to set up the SMTP connection, go to vars/vars.yml and edit the SMTPUsername and SMTPPassword if you are using Zoho. If you are using some other SMTP, then configure the SMTPServer and SMTPPort as well. The credentials have also been removed from the current system.*
+*If you want to set up the SMTP connection and you are using Zoho, go to vars/vars.yml and edit the SMTPUsername and SMTPPassword. If you are using some other SMTP, then configure the SMTPServer and SMTPPort as well.*
 
 ![image](images/5.png)
 
