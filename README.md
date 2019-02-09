@@ -105,7 +105,7 @@ Complete the email notification step by running ```ansible-playbook mattermost_c
 * Used vault to store the sensitive data as a separate file.
 
 ### Screencast
-The link for screencast is available [here](http://rayandasoriya.com/DevOps/HW2.mp4).
+The link for screencast is available [here](https://drive.google.com/file/d/1FWKxTXgxH7XXVwYdmnfTPGhNLLBaH7zT/view?usp=sharing).
 
 ### References
 1. https://github.com/CSC-DevOps/CM
