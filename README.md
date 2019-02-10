@@ -1,6 +1,4 @@
-# CSC519-DevOps
-## HW2
-
+# Mattermost Configuration using Ansible
 This repository contains the code to automatically configure a web server running [Mattermost](https://mattermost.com/) using Ansible. To perform the task, we have started by creating two servers running Ubuntu 16.04 with Ansible configured on one of them. After configuring Ansible, we made an SSH connection between the two servers. This connection was used to perform operations on the web server using the Ansible server. After that, I have updated the Ubuntu packages and installed MySQL Database server and Mattermost server. One admin and user have been created as the users of Mattermost server. The configuration of the server was done as the last stage of the project. this configuration included email notifications and storage options. For email confirmation, I have used [Zoho mail](https://www.zoho.com/mail/).
 
 
